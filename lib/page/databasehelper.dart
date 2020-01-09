@@ -1,6 +1,7 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'safelist.dart';
+
 class DatabaseHelper {
   static final DatabaseHelper _instance = DatabaseHelper.internal();
   factory DatabaseHelper() => _instance;
@@ -34,7 +35,6 @@ class DatabaseHelper {
     await db.execute(
         "create table $tableName($path text primary key,$name text not null ,$apppath text not null ,"
             "times text not null)");
-
   }
 
 //插入user
@@ -79,14 +79,11 @@ class DatabaseHelper {
     return null;
   }
 
-
-
   //清空数据
   Future<int> clear() async {
     var dbClient = await db;
     return await dbClient.delete(tableName);
   }
-
 
   //根据路径删除
   Future<int> deleteItem(String apppath) async {
